@@ -67,11 +67,10 @@ Available market variables include:
 
 Raw datasets are generated locally and are intentionally excluded from version control.
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 quant-trading-ds/
-│
 ├── data/
 │   ├── raw/
 │   │   └── .gitkeep
@@ -88,6 +87,9 @@ quant-trading-ds/
 │   ├── features/
 │   ├── strategies/
 │   └── evaluation/
+│
+├── docs/
+│   └── glossary.md
 │
 ├── reports/
 │   └── figures/
@@ -193,13 +195,17 @@ Strategies will eventually be evaluated using metrics including:
 * Profit Factor
 * Number of Trades
 
-## 📚 Glosario
 
-El proyecto incluye un glosario con los principales conceptos
-financieros, estadísticos y de Data Science utilizados durante
-el desarrollo.
+```
+### 📚 Documentation
 
-Ver: [`docs/glossary.md`](docs/glossary.md)
+The [`docs/glossary.md`](docs/glossary.md) file contains definitions of the
+main financial, statistical, and quantitative trading concepts used throughout
+the project.
+
+The glossary is progressively updated as new concepts are introduced during
+the research and development of the strategy.
+```
 
 ## ⚠️ Disclaimer
 
