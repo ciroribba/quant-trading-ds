@@ -193,6 +193,14 @@ Strategies will eventually be evaluated using metrics including:
 * Profit Factor
 * Number of Trades
 
+## 📚 Glosario
+
+El proyecto incluye un glosario con los principales conceptos
+financieros, estadísticos y de Data Science utilizados durante
+el desarrollo.
+
+Ver: [`docs/glossary.md`](docs/glossary.md)
+
 ## ⚠️ Disclaimer
 
 This project is intended for educational, research, and portfolio purposes only.
@@ -209,9 +217,9 @@ Past performance does not guarantee future results.
 * [x] Data collection
 * [x] Initial data inspection
 * [x] Closing price visualization
-* [ ] Exploratory data analysis
-* [ ] Return analysis
-* [ ] Feature engineering
+* [x] Exploratory data analysis
+* [x] Return analysis
+* [x] Initial feature engineering
 * [ ] Trading signal generation
 * [ ] Backtesting
 * [ ] Benchmark comparison
