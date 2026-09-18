@@ -73,28 +73,21 @@ Raw datasets are generated locally and are intentionally excluded from version c
 quant-trading-ds/
 ├── data/
 │   ├── raw/
-│   │   └── .gitkeep
+│   │   └── btc_usd.csv
 │   └── processed/
-│       └── .gitkeep
-│
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
 │   ├── 02_eda.ipynb
 │   └── 03_strategy_backtest.ipynb
-│
 ├── src/
 │   ├── data/
 │   ├── features/
 │   ├── strategies/
 │   └── evaluation/
-│
 ├── docs/
 │   └── glossary.md
-│
 ├── reports/
 │   └── figures/
-│
-├── .gitignore
 ├── README.md
 └── requirements.txt
 ```
@@ -195,6 +188,64 @@ Strategies will eventually be evaluated using metrics including:
 * Profit Factor
 * Number of Trades
 
+## Methodology
+
+The first version of the project evaluates a simple trend-following strategy
+based on two Simple Moving Averages (SMA):
+
+- **SMA 20:** short-term trend.
+- **SMA 50:** medium-term trend.
+
+The trading rule is:
+
+- **Long (1):** SMA 20 > SMA 50
+- **Out of market (0):** SMA 20 <= SMA 50
+
+No short positions or leverage are used.
+
+To avoid look-ahead bias, the trading position is shifted by one period so
+that a signal generated using information from day `t` is applied to the
+following trading period.
+
+The strategy is evaluated against **Buy & Hold** using:
+
+- cumulative return;
+- annualized volatility;
+- Sharpe Ratio;
+- Maximum Drawdown;
+- number of transactions;
+- transaction costs.
+
+A hypothetical transaction cost of **0.10% per transaction** is included in
+the net strategy results.
+
+## Initial Backtest Results
+
+The historical backtest currently covers BTC-USD data from 2018 onward.
+
+| Metric | SMA 20/50 | SMA 20/50 + Costs | Buy & Hold |
+|---|---:|---:|---:|
+| Cumulative Return | 642.88% | 591.93% | 582.99% |
+| Annualized Volatility | 43.04% | 43.04% | 61.68% |
+| Sharpe Ratio | 0.76 | 0.74 | 0.67 |
+| Maximum Drawdown | -57.88% | -58.61% | -76.63% |
+
+The strategy generated **71 transactions** during the analyzed period:
+
+- 36 entries;
+- 35 exits.
+
+Transaction costs reduce the difference in cumulative return between the
+SMA strategy and Buy & Hold considerably.
+
+However, the historical risk profiles remain different. Under the assumptions
+used in this backtest, the SMA strategy shows lower annualized volatility and
+a less severe Maximum Drawdown than Buy & Hold.
+
+These results are historical backtest results and should not be interpreted
+as evidence that the strategy will produce similar results on future data.
+Temporal out-of-sample validation has not yet been performed.
+
 
 ```
 ### 📚 Documentation
@@ -219,19 +270,21 @@ Past performance does not guarantee future results.
 
 ### V1 — Quantitative Trend Strategy
 
-* [x] Project structure
-* [x] Data collection
-* [x] Initial data inspection
-* [x] Closing price visualization
-* [x] Exploratory data analysis
-* [x] Return analysis
-* [x] Initial feature engineering
-* [ ] Trading signal generation
-* [ ] Backtesting
-* [ ] Benchmark comparison
-* [ ] Risk analysis
-* [ ] Temporal validation
-* [ ] Final V1 report
+- [x] Historical BTC data collection
+- [x] Data cleaning and preparation
+- [x] Exploratory Data Analysis (EDA)
+- [x] Daily return analysis
+- [x] SMA 20 / SMA 50 feature engineering
+- [x] Trading signal generation
+- [x] Look-ahead bias prevention
+- [x] Strategy backtesting
+- [x] Buy & Hold benchmark
+- [x] Risk and performance metrics
+- [x] Transaction cost analysis
+- [ ] Temporal train / validation / test split
+- [ ] Out-of-sample evaluation
+- [ ] Strategy robustness analysis
+- [ ] Final V1 report
 
 ---
 
